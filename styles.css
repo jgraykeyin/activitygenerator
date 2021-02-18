@@ -7,9 +7,10 @@ body {
 #main-container {
     display: grid;
     grid-template-rows: 1fr 1fr 1fr 1fr;
-    grid-gap: 1rem;
-    max-width: 600px;
+    grid-gap: 3rem;
+    max-width: 680px;
     margin: auto;
+    margin-top: 2rem;
 }
 
 header {
@@ -20,21 +21,28 @@ header {
     grid-template-areas: 
     "logo sitename sitename"
     "logo tagline tagline";
-    padding: 18px;
+    padding: 10px;;
+    justify-items:stretch;
+    align-items: center;
+}
+
+header img {
+    width: 80%;
 }
 
 #logo {
     grid-area: logo;
+    justify-self: right;
 }
 
 #sitename {
-    font-size: 72px;
+    font-size: 58px;
     font-weight: bold;
     grid-area: sitename;
 }
 
 #tagline {
-    font-size: 20px;
+    font-size: 18px;
     grid-area: tagline;
 }
 
@@ -63,10 +71,16 @@ header {
     color: #445341;
     border: 4px solid #4A534B;
     border-radius: 30px;
+    box-shadow: inset 0px 6px 6px 2px #ccc;
     font-weight: medium;
     font-size: 32px;
     text-align: center;
-    padding: auto;
+    margin-left: 6rem;
+    margin-right: 6rem;
+}
+
+#output-text {
+    margin-top:2rem;
 }
 
 
