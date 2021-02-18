@@ -3,3 +3,73 @@ body {
     background-size: cover;
     font-family: 'Mali', cursive;
 }
+
+#main-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    max-width: 600px;
+    margin: auto;
+}
+
+header {
+    grid-row: 1 / 2;
+    background-color: #fff;
+    border-radius: 30px;
+    display: grid;
+    grid-template-areas: 
+    "logo sitename sitename"
+    "logo tagline tagline";
+    padding: 18px;
+}
+
+#logo {
+    grid-area: logo;
+}
+
+#sitename {
+    font-size: 72px;
+    font-weight: bold;
+    grid-area: sitename;
+}
+
+#tagline {
+    font-size: 20px;
+    grid-area: tagline;
+}
+
+#button-area {
+    grid-row: 2 / 3;
+    justify-self: center;
+    align-self: center;
+}
+
+#activity-button {
+    min-width: 24px;
+    min-height: 24px;
+    background-color: #FFFBA4;
+    border: 14px solid #FFCC48;
+    border-radius: 20px;
+    box-shadow: 2px 2px black;
+    padding: 10px;
+    width: 64px;
+
+}
+
+
+#output-area {
+    grid-row: 3 / 4;
+    background-color: #FBFFD0;
+    color: #445341;
+    border: 4px solid #4A534B;
+    border-radius: 30px;
+    font-weight: medium;
+    font-size: 32px;
+    text-align: center;
+    padding: auto;
+}
+
+
+#controls-area {
+    grid-row: 4 / 5;
+}
