@@ -10,7 +10,7 @@ async function fetchJSONData() {
     let num = Math.floor(Math.random() * things.length);
     console.log(things[num]["action"]);
 
-    document.getElementById("text-area").innerHTML = `<p>${things[num]['action']}</p>`;
+    document.getElementById("output-text").innerHTML = `<p>${things[num]['action']}</p>`;
 
 
 }
@@ -20,7 +20,7 @@ function main() {
 
     console.log("Hey!");
 
-    refresh_btn = document.getElementById("refresh-btn");
+    refresh_btn = document.getElementById("activity-button");
     refresh_btn.addEventListener("click", function() {
         let timerId = setInterval(() => {
             fetchJSONData();
