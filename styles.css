@@ -65,7 +65,7 @@ header img {
 }
 
 #activity-button:active {
-    background-color: #FFCC48;
+    background-color: #fff;
     box-shadow: 0px 0px black;
     transform: translateY(4px);
     outline:none;
@@ -73,6 +73,11 @@ header img {
 
 #activity-button:hover {
     border: 14px solid #fff;
+}
+
+#activity-button:focus {
+    background-color: #FFFBA4;
+    border: 14px solid #FFCC48;
 }
 
 
@@ -97,4 +102,38 @@ header img {
 
 #controls-area {
     grid-row: 4 / 5;
+}
+
+
+@media only screen and (max-width: 500px) {
+    #sitename {
+        font-size: 32px;
+        font-weight: bold;
+        grid-area: sitename;
+    }
+    
+    #tagline {
+        font-size: 10px;
+        grid-area: tagline;
+    }
+
+    #logo {
+        text-align: center;
+    }
+
+    header img {
+        width: 60%;
+    }
+
+    #main-container {
+        grid-gap: 0rem;
+        grid-template-rows: 1fr 2fr 2fr 2fr;
+    }
+
+    #output-area {
+        font-size: 24px;
+        margin-left: 1rem;
+        margin-right: 1rem;
+    }
+    
 }
