@@ -13,6 +13,7 @@ async function fetchJSONData() {
     document.getElementById("output-text").innerHTML = `<p>${things[num]['action']}</p>`;
 }
 
+
 function main() {
 
     console.log("Hey!");
@@ -28,13 +29,38 @@ function main() {
     buttonListeners();
 }
 
+
 function rejectActivity(reject, refresh, accept) {
-    console.log("Reject!");
     // Reset the board so the spin button is the only one visible
     reject.setAttribute("type","hidden");
     refresh.setAttribute("type","image");
     accept.setAttribute("type","hidden");
 }
+
+
+function acceptActivity(reject, accept) {
+    let current_activity = document.getElementById("output-text");
+
+    reject.setAttribute("type","hidden");
+    accept.setAttribute("type","hidden");
+
+    current_activity.innerHTML = "It's time to " + current_activity.innerText + "!<br /><span style='font-size:26px;'>Please enter your parent code when the activity is done.</span>";
+
+    // Swap grid positions for the output and button areas
+    let button_area = document.getElementById("button-area");
+    let output_area = document.getElementById("output-area");
+    let main_area = document.getElementById("main-container");
+
+    // Swap positions of the button & output areas so the focus will go to the output text
+    main_area.style.gridTemplateRows = "1fr 3fr 1fr 1fr";
+    button_area.style.gridRow = "3 / 4";
+    output_area.style.gridRow = "2 / 3";
+
+    console.log("Ok speak now...");
+    speakText();
+
+}
+
 
 // Keeping all our button listeners inside this function
 function buttonListeners() {
@@ -47,7 +73,11 @@ function buttonListeners() {
         console.log("Clicking reject");
         rejectActivity(reject_btn, refresh_btn, accept_btn);
     });
-    // accept_btn.addEventListener("click", acceptActivity());
+
+    accept_btn.addEventListener("click", function() {
+        console.log("Clicking accept");
+        acceptActivity(reject_btn, accept_btn);
+    });
 
     // Setup the sound button
     let sound_btn = document.getElementById("sound-button");
@@ -57,7 +87,7 @@ function buttonListeners() {
     let snd_spin = new sound("audio/spin1.m4a");
     let snd_done = new sound("audio/done1.m4a");
 
-    // Give the main button's click event
+    // Spin the main activity randomizer
     refresh_btn.addEventListener("click", function() {
         
         snd_spin.play();
@@ -86,6 +116,7 @@ function buttonListeners() {
     });
 }
 
+
 // Speech Synth for reading the output
 function speakText() {
 
@@ -95,10 +126,14 @@ function speakText() {
     let text = new SpeechSynthesisUtterance(output);
     
     // This will stop the voice from repeating a million times if somebody mashes the button
-    if (synth.speaking == false) {
+    if (synth.speaking) {
+        synth.cancel();
+        synth.speak(text);
+    } else {
         synth.speak(text);
     }
 }
+
 
 // Object to create a new audio element for sound effects to play
 class sound {

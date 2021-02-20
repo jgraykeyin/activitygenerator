@@ -6,7 +6,7 @@ body {
 
 #main-container {
     display: grid;
-    grid-template-rows: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 2fr 1fr;
     grid-gap: 3rem;
     max-width: 680px;
     margin: auto;
@@ -24,6 +24,7 @@ header {
     padding: 10px;;
     justify-items:stretch;
     align-items: center;
+    max-height: 100px;
 }
 
 header img {
@@ -118,6 +119,12 @@ header img {
 
 #output-text {
     margin-top:2rem;
+}
+
+#parent-code {
+    font-size: 38px;
+    width: 3em;
+    font-family: 'Mali', cursive;
 }
 
 
