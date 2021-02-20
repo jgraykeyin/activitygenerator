@@ -24,6 +24,31 @@ function main() {
         console.log("Speech synth not supported")
     }
 
+    // Initialize our buttons
+    buttonListeners();
+}
+
+function rejectActivity(reject, refresh, accept) {
+    console.log("Reject!");
+    // Reset the board so the spin button is the only one visible
+    reject.setAttribute("type","hidden");
+    refresh.setAttribute("type","image");
+    accept.setAttribute("type","hidden");
+}
+
+// Keeping all our button listeners inside this function
+function buttonListeners() {
+
+    let reject_btn = document.getElementById("reject-button");
+    let refresh_btn = document.getElementById("activity-button");
+    let accept_btn = document.getElementById("accept-button");
+
+    reject_btn.addEventListener("click", function() {
+        console.log("Clicking reject");
+        rejectActivity(reject_btn, refresh_btn, accept_btn);
+    });
+    // accept_btn.addEventListener("click", acceptActivity());
+
     // Setup the sound button
     let sound_btn = document.getElementById("sound-button");
     sound_btn.addEventListener("click", speakText);
@@ -33,19 +58,31 @@ function main() {
     let snd_done = new sound("audio/done1.m4a");
 
     // Give the main button's click event
-    let refresh_btn = document.getElementById("activity-button");
     refresh_btn.addEventListener("click", function() {
         
         snd_spin.play();
+
+        // Hiding the main spin button
+        refresh_btn.setAttribute("type","hidden");
         
         // Setup a repeating timer to make the text quickly change in the output window
         let timerId = setInterval(() => {
             fetchJSONData();
-        }, 57);
+        }, 50);
 
         // Stop the timer and play the success sound
-        setTimeout(() => { clearInterval(timerId); snd_done.play(); }, 2000);
-        
+        setTimeout(() => { 
+            clearInterval(timerId); 
+            snd_done.play();
+            reject_btn.setAttribute("type","image");
+            accept_btn.setAttribute("type","image");
+        }, 2000);
+
+        // This needs to be fixed, probably using promises. 
+        // But right now, it'll trigger the speech just after the main spin is done.
+        setTimeout(() => {
+            speakText();
+        }, 2200);
     });
 }
 
@@ -54,10 +91,13 @@ function speakText() {
 
     // Now we'll get the text that's been chosen and get our speech synth to read it out
     let output = document.getElementById("output-text").innerText;
-
-    let speak_words = new SpeechSynthesisUtterance();
-    speak_words.text = output;
-    window.speechSynthesis.speak(speak_words);
+    let synth = window.speechSynthesis;
+    let text = new SpeechSynthesisUtterance(output);
+    
+    // This will stop the voice from repeating a million times if somebody mashes the button
+    if (synth.speaking == false) {
+        synth.speak(text);
+    }
 }
 
 // Object to create a new audio element for sound effects to play

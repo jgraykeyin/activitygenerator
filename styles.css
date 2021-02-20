@@ -50,9 +50,14 @@ header img {
     grid-row: 2 / 3;
     justify-self: center;
     align-self: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 1rem;
+    justify-items: center;
+    justify-content: center;
 }
 
-#activity-button {
+.game-controls {
     min-width: 24px;
     min-height: 24px;
     background-color: #FFFBA4;
@@ -62,6 +67,22 @@ header img {
     padding: 10px;
     width: 64px;
     outline: none;
+}
+
+#reject-button {
+    background-color: #FFBFA4;
+    border-color: #FF7448;
+    grid-column: 1 / 2;
+}
+
+#activity-button {
+    grid-column: 2 / 3;
+}
+
+#accept-button {
+    background-color: #C8FF91;
+    border-color: #48FF50;
+    grid-column: 3 / 4;
 }
 
 #activity-button:active {
