@@ -102,6 +102,8 @@ header img {
 
 #controls-area {
     grid-row: 4 / 5;
+    align-self:baseline;
+    justify-self: center;
 }
 
 
