@@ -44,7 +44,7 @@ function acceptActivity(reject, accept) {
     reject.setAttribute("type","hidden");
     accept.setAttribute("type","hidden");
 
-    current_activity.innerHTML = "It's time to " + current_activity.innerText + "!<br /><span style='font-size:26px;'>Please enter your parent code when the activity is done.</span>";
+    current_activity.innerHTML = "<p>It's time to " + current_activity.innerText + "!</p><p style='font-size:20px;'>Please enter your parent code when the activity is done.</span>";
 
     // Swap grid positions for the output and button areas
     let button_area = document.getElementById("button-area");

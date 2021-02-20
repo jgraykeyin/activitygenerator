@@ -136,6 +136,7 @@ header img {
 
 
 @media only screen and (max-width: 500px) {
+
     #sitename {
         font-size: 32px;
         font-weight: bold;
@@ -156,14 +157,16 @@ header img {
     }
 
     #main-container {
-        grid-gap: 0rem;
-        grid-template-rows: 1fr 2fr 2fr 2fr;
+        grid-gap: 1rem;
+        grid-template-rows: 1fr 1.5fr 2fr 1fr;
     }
 
     #output-area {
         font-size: 24px;
         margin-left: 1rem;
         margin-right: 1rem;
+        padding-left: 1px;
+        padding-right: 1px;
     }
     
 }
