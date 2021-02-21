@@ -25,6 +25,10 @@ function main() {
         console.log("Speech synth not supported")
     }
 
+    // Initialize the parent security code
+    let parent_code = "1234";
+    localStorage.setItem("parent_code",parent_code);
+
     // Initialize our buttons
     buttonListeners();
 }
@@ -56,8 +60,40 @@ function acceptActivity(reject, accept) {
     button_area.style.gridRow = "3 / 4";
     output_area.style.gridRow = "2 / 3";
 
-    console.log("Ok speak now...");
+    // Show the parent code inputbox & submit button
+    let parent_code = document.getElementById("parent-code");
+    let parent_submit = document.getElementById("parent-submit");
+
+    parent_code.setAttribute("type","password");
+    parent_submit.setAttribute("type","image");
     speakText();
+
+}
+
+function submitParentCode(val, refresh) {
+    console.log(val);
+
+    let output_text = document.getElementById("output-text");
+    let output_area = document.getElementById("output-area");
+    let button_area = document.getElementById("button-area");
+    let main_area = document.getElementById("main-container");
+
+    output_text.innerHTML = "Congratulations! <br />You earned a star!";
+
+    // Switch the grid back. Maybe I should find a better way to do this?
+    main_area.style.gridTemplateRows = "1fr 1fr 2fr 1fr";
+    button_area.style.gridRow = "2 / 3";
+    output_area.style.gridRow = "3 / 4";
+
+    // Hide the inputs
+    let inputbox = document.getElementById("parent-code");
+    let submitbtn = document.getElementById("parent-submit");
+    inputbox.setAttribute("type","hidden");
+    inputbox.value = "";
+    submitbtn.setAttribute("type","hidden");
+
+    // Show the Spin button again
+    refresh.setAttribute("type","image");
 
 }
 
@@ -68,6 +104,7 @@ function buttonListeners() {
     let reject_btn = document.getElementById("reject-button");
     let refresh_btn = document.getElementById("activity-button");
     let accept_btn = document.getElementById("accept-button");
+    let codesubmit_btn = document.getElementById("parent-submit");
 
     reject_btn.addEventListener("click", function() {
         console.log("Clicking reject");
@@ -77,6 +114,12 @@ function buttonListeners() {
     accept_btn.addEventListener("click", function() {
         console.log("Clicking accept");
         acceptActivity(reject_btn, accept_btn);
+    });
+
+    codesubmit_btn.addEventListener("click", function() {
+        console.log("Clicking code submit");
+        let code = document.getElementById("parent-code").value;
+        submitParentCode(code, refresh_btn);
     });
 
     // Setup the sound button
