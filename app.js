@@ -95,6 +95,8 @@ function submitParentCode(val, refresh) {
     // Show the Spin button again
     refresh.setAttribute("type","image");
 
+    // Read the congrats message
+    speakText();
 }
 
 
@@ -165,15 +167,48 @@ function speakText() {
 
     // Now we'll get the text that's been chosen and get our speech synth to read it out
     let output = document.getElementById("output-text").innerText;
-    let synth = window.speechSynthesis;
-    let text = new SpeechSynthesisUtterance(output);
+    
+    const voiceIndex = 0;
+    const voiceURI = "Google UK English Female";
+
+    const speak = async text => {
+        if (!speechSynthesis) {
+          return;
+        }
+        const message = new SpeechSynthesisUtterance(text);
+        message.voice = await chooseVoice();
+        speechSynthesis.speak(message);
+    }
+
+    const getVoices = () => {
+        return new Promise(resolve => {
+          let voices = speechSynthesis.getVoices();
+          if (voices.length) {
+            resolve(voices);
+            return;
+          }
+          speechSynthesis.onvoiceschanged = () => {
+            voices = speechSynthesis.getVoices();
+            resolve(voices);
+          }
+        });
+      }
+
+      const chooseVoice = async () => {
+        const voices = (await getVoices()).filter(voice => voice.voiceURI == voiceURI);
+      
+        return new Promise(resolve => {
+          resolve(voices[voiceIndex]);
+        });
+    }
+
     
     // This will stop the voice from repeating a million times if somebody mashes the button
-    if (synth.speaking) {
-        synth.cancel();
-        synth.speak(text);
+    if (speechSynthesis.speaking) {
+        speechSynthesis.cancel();
+        speak(output);
     } else {
-        synth.speak(text);
+        speak(output);
     }
 }
 
