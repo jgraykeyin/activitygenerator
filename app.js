@@ -25,11 +25,8 @@ function main() {
         console.log("Speech synth not supported")
     }
 
-    // Initialize the parent security code
-    let parent_code = "1234";
-    localStorage.setItem("parent_code",parent_code);
-
-    // 
+    // Initialize the star counter
+    starCounter(0);
 
     // Initialize our buttons
     buttonListeners();
@@ -69,8 +66,28 @@ function acceptActivity(reject, accept) {
     // parent_code.setAttribute("type","password");
     parent_submit.setAttribute("type","image");
     speakText();
-
 }
+
+
+function starCounter(val) {
+
+    let star_count = parseInt(localStorage.getItem("star_count"));
+
+    if (val == 0) {
+        // Initialize the star count
+        if (star_count === null || isNaN(star_count)) {
+            console.log("Hey empty");
+            init_count = 0;
+            localStorage.setItem("star_count", init_count);
+        }
+    } else {
+        // Increase the star count
+        let new_count = star_count + val;
+        localStorage.setItem("star_count", new_count);
+        console.log(`New star count: ${new_count}`);
+    }
+}
+
 
 function submitParentCode(refresh) {
 
@@ -80,6 +97,7 @@ function submitParentCode(refresh) {
     let main_area = document.getElementById("main-container");
 
     output_text.innerHTML = "Congratulations! <br />You earned a star!";
+    starCounter(1);
 
     // Switch the grid back. Maybe I should find a better way to do this?
     main_area.style.gridTemplateRows = "1fr 1fr 2fr 1fr";
@@ -169,6 +187,7 @@ function speakText() {
     // Now we'll get the text that's been chosen and get our speech synth to read it out
     let output = document.getElementById("output-text").innerText;
     
+    // This will try to select the female UK voice.
     const voiceIndex = 0;
     const voiceURI = "Google UK English Female";
 
@@ -203,7 +222,6 @@ function speakText() {
         });
     }
 
-    
     // This will stop the voice from repeating a million times if somebody mashes the button
     if (speechSynthesis.speaking) {
         speechSynthesis.cancel();
