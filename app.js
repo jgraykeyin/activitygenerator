@@ -29,6 +29,8 @@ function main() {
     let parent_code = "1234";
     localStorage.setItem("parent_code",parent_code);
 
+    // 
+
     // Initialize our buttons
     buttonListeners();
 }
@@ -48,7 +50,7 @@ function acceptActivity(reject, accept) {
     reject.setAttribute("type","hidden");
     accept.setAttribute("type","hidden");
 
-    current_activity.innerHTML = "<p>It's time to " + current_activity.innerText + "!</p><p style='font-size:20px;'>Please enter your parent code when the activity is done.</span>";
+    current_activity.innerHTML = "<p>It's time to " + current_activity.innerText + "!</p><p style='font-size:20px;padding:8px;'>Press the button when you're done the activity.</span>";
 
     // Swap grid positions for the output and button areas
     let button_area = document.getElementById("button-area");
@@ -61,17 +63,16 @@ function acceptActivity(reject, accept) {
     output_area.style.gridRow = "2 / 3";
 
     // Show the parent code inputbox & submit button
-    let parent_code = document.getElementById("parent-code");
+    // let parent_code = document.getElementById("parent-code");
     let parent_submit = document.getElementById("parent-submit");
 
-    parent_code.setAttribute("type","password");
+    // parent_code.setAttribute("type","password");
     parent_submit.setAttribute("type","image");
     speakText();
 
 }
 
-function submitParentCode(val, refresh) {
-    console.log(val);
+function submitParentCode(refresh) {
 
     let output_text = document.getElementById("output-text");
     let output_area = document.getElementById("output-area");
@@ -86,10 +87,10 @@ function submitParentCode(val, refresh) {
     output_area.style.gridRow = "3 / 4";
 
     // Hide the inputs
-    let inputbox = document.getElementById("parent-code");
+    // let inputbox = document.getElementById("parent-code");
+    // inputbox.setAttribute("type","hidden");
+    // inputbox.value = "";
     let submitbtn = document.getElementById("parent-submit");
-    inputbox.setAttribute("type","hidden");
-    inputbox.value = "";
     submitbtn.setAttribute("type","hidden");
 
     // Show the Spin button again
@@ -120,8 +121,8 @@ function buttonListeners() {
 
     codesubmit_btn.addEventListener("click", function() {
         console.log("Clicking code submit");
-        let code = document.getElementById("parent-code").value;
-        submitParentCode(code, refresh_btn);
+        // let code = document.getElementById("parent-code").value;
+        submitParentCode(refresh_btn);
     });
 
     // Setup the sound button

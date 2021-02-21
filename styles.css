@@ -102,6 +102,11 @@ header img {
     border: 14px solid #FFCC48;
 }
 
+#parent-submit {
+    background-color: #C8FF91;
+    border: 14px solid #48FF50;
+}
+
 
 #output-area {
     grid-row: 3 / 4;
@@ -119,12 +124,6 @@ header img {
 
 #output-text {
     margin-top:2rem;
-}
-
-#parent-code {
-    font-size: 38px;
-    width: 3em;
-    font-family: 'Mali', cursive;
 }
 
 
