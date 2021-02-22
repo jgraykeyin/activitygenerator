@@ -47,7 +47,7 @@ function acceptActivity(reject, accept) {
     reject.setAttribute("type","hidden");
     accept.setAttribute("type","hidden");
 
-    current_activity.innerHTML = "<p>It's time to " + current_activity.innerText + "!</p><p style='font-size:20px;padding:8px;'>Press the button when you're done the activity.</span>";
+    current_activity.innerHTML = "<p>It's time to " + current_activity.innerText + "!<br />Press the button when you're done the activity.</p>";
 
     // Swap grid positions for the output and button areas
     let button_area = document.getElementById("button-area");
@@ -55,7 +55,7 @@ function acceptActivity(reject, accept) {
     let main_area = document.getElementById("main-container");
 
     // Swap positions of the button & output areas so the focus will go to the output text
-    main_area.style.gridTemplateRows = "1fr 3fr 1fr 1fr";
+    main_area.style.gridTemplateRows = "1fr 3fr 0.2fr 1fr 1fr";
     button_area.style.gridRow = "3 / 4";
     output_area.style.gridRow = "2 / 3";
 
@@ -100,9 +100,9 @@ function submitParentCode(refresh) {
     starCounter(1);
 
     // Switch the grid back. Maybe I should find a better way to do this?
-    main_area.style.gridTemplateRows = "1fr 1fr 2fr 1fr";
+    main_area.style.gridTemplateRows = "1fr 1fr 0.4fr 2fr 1fr";
     button_area.style.gridRow = "2 / 3";
-    output_area.style.gridRow = "3 / 4";
+    output_area.style.gridRow = "4 / 5";
 
     // Hide the inputs
     // let inputbox = document.getElementById("parent-code");
