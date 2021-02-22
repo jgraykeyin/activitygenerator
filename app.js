@@ -1,16 +1,23 @@
 async function fetchJSONData() {
     
-    let url="things_todo.json";
+    let url="activities.json";
     let response = await fetch(url);
-    let things = await response.json();
+    let activities = await response.json();
 
-    // console.log(things);
+    // Generate a random number for the main activity
+    let main_len = activities.length;
+    let main_num = Math.floor(Math.random() * main_len);
 
-    // Create random number to select an item from the JSON data
-    let num = Math.floor(Math.random() * things.length);
-    // console.log(things[num]["action"]);
+    // Generate a random number for the sub activity
+    let sub_len = activities[main_num]["actions"].length;
+    let sub_num = Math.floor(Math.random() * sub_len);
 
-    document.getElementById("output-text").innerHTML = `<p>${things[num]['action']}</p>`;
+    // Combine the main & sub activities 
+    let act1 = activities[main_num]["activity"];
+    let act2 = activities[main_num]["actions"][sub_num]["action"];
+    let activity = act1 + act2
+    
+    document.getElementById("output-text").innerHTML = `<p>${activity}</p>`;
 }
 
 

@@ -1,0 +1,123 @@
+[
+    {
+        "activity": "Play ",
+        "actions":
+        [
+            {
+                "action": "video games"
+            },
+            {
+                "action": "a card game"
+            },
+            {
+                "action": "with Lego blocks"
+            },
+            {
+                "action": "with magnet blocks"
+            },
+            {
+                "action": "a board game"
+            },
+            {
+                "action": "with cuddlies"
+            },
+            {
+                "action": "with pets"
+            },
+            {
+                "action": "with toy cars"
+            }
+        ]
+    },
+    {
+        "activity": "Make ",
+        "actions":
+        [
+            {
+                "action": "a pillow fort"
+            },
+            {
+                "action": "a costume"
+            },
+            {
+                "action": "a beautiful painting"
+            },
+            {
+                "action": "a paper airplane"
+            },
+            {
+                "action": "a batch of cookies"
+            }
+        ]
+    },
+    {
+        "activity": "Read ",
+        "actions":
+        [
+            {
+                "action": "a school book"
+            },
+            {
+                "action": "a new book"
+            },
+            {
+                "action": "a comic book"
+            }
+        ]
+    },
+    {
+        "activity": "Exercise ",
+        "actions": 
+        [
+            {
+                "action": "by running around"
+            },
+            {
+                "action": "by doing yoga"
+            },
+            {
+                "action": "with a punching bag"
+            },
+            {
+                "action": "with jumping jacks"
+            }
+        ]
+    },
+    {
+        "activity": "Dance ",
+        "actions":[
+            {
+                "action": "like a robot"
+            },
+            {
+                "action": "with silly music"
+            },
+            {
+                "action": "like a ballerina"
+            }
+        ]
+    },
+    {
+        "activity": "Draw ",
+        "actions":[
+            {
+                "action": "your favorite animal"
+            },
+            {
+                "action": "your family"
+            },
+            {
+                "action": "a really big pizza"
+            },
+            {
+                "action": "a silly monster"
+            },
+            {
+                "action": "the sun and the moon"
+            },
+            {
+                "action": "your best friend"
+            }
+        ]
+    }
+]
