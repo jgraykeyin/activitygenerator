@@ -26,10 +26,73 @@ function main() {
     }
 
     // Initialize the star counter
-    starCounter(0);
+    initStarCounter();
+
+    // Check to see how many stars we have and display the star images
+    //checkStarCount();
 
     // Initialize our buttons
     buttonListeners();
+}
+
+
+// Loads in all star images from localStorage
+function checkStarCount() {
+    let stars = parseInt(localStorage.getItem("star_count"));
+
+
+}
+
+
+// This function will make sure all the stars are loaded from localStorage when the page loads up
+function initStarCounter() {
+    let star_count = parseInt(localStorage.getItem("star_count"));
+    console.log("Init stars: " + star_count);
+    
+
+    if (star_count === null || isNaN(star_count)) {
+        init_count = 0;
+        localStorage.setItem("star_count", init_count);
+    } else {
+        let x=0;
+        while (x < star_count) {
+            addStarImage();
+            x+=1;
+        }
+    }
+}
+
+
+function removeStarImage() {
+    let display = document.getElementById("star-area");
+    display.innerHTML = "";
+    initStarCounter();
+}
+
+
+function removeStarCount() {
+    let star_count = parseInt(localStorage.getItem("star_count"));
+    let new_count = star_count - 1;
+    
+    localStorage.setItem("star_count", new_count);
+    console.log(`New star count: ${new_count}`);
+    removeStarImage();
+}
+
+
+function addStarCount() {
+    let star_count = parseInt(localStorage.getItem("star_count"));
+    let new_count = star_count + 1;
+    
+    localStorage.setItem("star_count", new_count);
+    console.log(`New star count: ${new_count}`);
+}
+
+
+function addStarImage() {
+    let image = "<img src='images/teal_star.png'>";
+    let display = document.getElementById("star-area");
+    display.innerHTML = display.innerHTML + image;
 }
 
 
@@ -38,6 +101,8 @@ function rejectActivity(reject, refresh, accept) {
     reject.setAttribute("type","hidden");
     refresh.setAttribute("type","image");
     accept.setAttribute("type","hidden");
+
+    removeStarCount();
 }
 
 
@@ -53,11 +118,14 @@ function acceptActivity(reject, accept) {
     let button_area = document.getElementById("button-area");
     let output_area = document.getElementById("output-area");
     let main_area = document.getElementById("main-container");
+    let star_area = document.getElementById("star-area");
 
     // Swap positions of the button & output areas so the focus will go to the output text
     main_area.style.gridTemplateRows = "1fr 3fr 0.2fr 1fr 1fr";
-    button_area.style.gridRow = "3 / 4";
+    button_area.style.gridRow = "4 / 5";
+    star_area.style.gridRow = "3 / 4"
     output_area.style.gridRow = "2 / 3";
+
 
     // Show the parent code inputbox & submit button
     // let parent_code = document.getElementById("parent-code");
@@ -69,45 +137,26 @@ function acceptActivity(reject, accept) {
 }
 
 
-function starCounter(val) {
-
-    let star_count = parseInt(localStorage.getItem("star_count"));
-
-    if (val == 0) {
-        // Initialize the star count
-        if (star_count === null || isNaN(star_count)) {
-            console.log("Hey empty");
-            init_count = 0;
-            localStorage.setItem("star_count", init_count);
-        }
-    } else {
-        // Increase the star count
-        let new_count = star_count + val;
-        localStorage.setItem("star_count", new_count);
-        console.log(`New star count: ${new_count}`);
-    }
-}
-
-
 function submitParentCode(refresh) {
 
     let output_text = document.getElementById("output-text");
     let output_area = document.getElementById("output-area");
     let button_area = document.getElementById("button-area");
     let main_area = document.getElementById("main-container");
+    let star_area = document.getElementById("star-area");
 
-    output_text.innerHTML = "Congratulations! <br />You earned a star!";
-    starCounter(1);
+    output_text.innerHTML = "Congratulations! <br />You've earned a star!";
+    addStarCount();
+    addStarImage();
+
 
     // Switch the grid back. Maybe I should find a better way to do this?
     main_area.style.gridTemplateRows = "1fr 1fr 0.4fr 2fr 1fr";
     button_area.style.gridRow = "2 / 3";
+    star_area.style.gridRow = "3 / 4";
     output_area.style.gridRow = "4 / 5";
 
-    // Hide the inputs
-    // let inputbox = document.getElementById("parent-code");
-    // inputbox.setAttribute("type","hidden");
-    // inputbox.value = "";
+    // Hide the Okay button
     let submitbtn = document.getElementById("parent-submit");
     submitbtn.setAttribute("type","hidden");
 

@@ -110,6 +110,7 @@ header img {
 
 #star-area {
     grid-row: 3 / 4;
+    justify-self: center;
 }
 
 
