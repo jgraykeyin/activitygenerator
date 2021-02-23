@@ -4,6 +4,14 @@ async function fetchJSONData() {
     let response = await fetch(url);
     let activities = await response.json();
 
+    localStorage.setItem("activitiesJSON", JSON.stringify(activities));
+}
+
+async function fetchActivity() {
+
+    let actJSON = localStorage.getItem("activitiesJSON");
+    let activities = JSON.parse(actJSON);
+
     // Generate a random number for the main activity
     let main_len = activities.length;
     let main_num = Math.floor(Math.random() * main_len);
@@ -32,22 +40,14 @@ function main() {
         console.log("Speech synth not supported")
     }
 
+    // Grab the activities from the JSON File
+    fetchJSONData();
+
     // Initialize the star counter
     initStarCounter();
 
-    // Check to see how many stars we have and display the star images
-    //checkStarCount();
-
     // Initialize our buttons
     buttonListeners();
-}
-
-
-// Loads in all star images from localStorage
-function checkStarCount() {
-    let stars = parseInt(localStorage.getItem("star_count"));
-
-
 }
 
 
@@ -217,7 +217,7 @@ function buttonListeners() {
         
         // Setup a repeating timer to make the text quickly change in the output window
         let timerId = setInterval(() => {
-            fetchJSONData();
+            fetchActivity();
         }, 50);
 
         // Stop the timer and play the success sound
