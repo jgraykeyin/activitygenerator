@@ -13,6 +13,16 @@ body {
     margin-top: 2rem;
 }
 
+#login-container {
+    display: grid;
+    grid-template-rows: 1fr 1fr 2fr;
+    grid-gap: 1.5rem;
+    max-width: 680px;
+    margin: auto;
+    margin-top: 2rem;
+    align-items: center;
+}
+
 header {
     grid-row: 1 / 2;
     background-color: #fff;
@@ -25,6 +35,28 @@ header {
     justify-items:stretch;
     align-items: center;
     max-height: 100px;
+}
+
+#parentcopy {
+    grid-row: 2 / 3;
+    background-color: #fff;
+    margin-left: 2rem;
+    margin-right: 2rem;
+    border-radius: 30px;
+    text-align: center;
+}
+
+#input-area {
+    grid-row: 3 / 4;
+    justify-self: center;
+    align-self: baseline;
+    text-align: center;
+}
+
+#input-area input {
+    font-size: 22px;
+    margin: 10px;
+    padding: 4px;
 }
 
 header img {
@@ -68,6 +100,19 @@ header img {
     padding: 10px;
     width: 64px;
     outline: none;
+}
+
+#login-button {
+    background-color: #C8FF91;
+    border: 7px solid #48FF50;
+    border-radius: 20px;
+    box-shadow: 2px 2px black;
+    outline: none;
+    padding: 10px;
+    padding-left: 16px;
+    padding-right: 16px;
+    font-family: 'Mali', cursive;
+    font-weight: bold;
 }
 
 #reject-button {
