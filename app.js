@@ -1,5 +1,6 @@
 async function fetchJSONData() {
     
+    // Fetch the JSON file and save it into localStorage
     let url="activities.json";
     let response = await fetch(url);
     let activities = await response.json();
@@ -7,8 +8,10 @@ async function fetchJSONData() {
     localStorage.setItem("activitiesJSON", JSON.stringify(activities));
 }
 
+
 async function fetchActivity() {
 
+    // Access the JSON data saved in localStorage
     let actJSON = localStorage.getItem("activitiesJSON");
     let activities = JSON.parse(actJSON);
 
@@ -56,7 +59,6 @@ function initStarCounter() {
     let star_count = parseInt(localStorage.getItem("star_count"));
     console.log("Init stars: " + star_count);
     
-
     if (star_count === null || isNaN(star_count)) {
         init_count = 0;
         localStorage.setItem("star_count", init_count);
@@ -156,7 +158,6 @@ function activityComplete(refresh) {
     addStarCount();
     addStarImage();
 
-
     // Switch the grid back. Maybe I should find a better way to do this?
     main_area.style.gridTemplateRows = "1fr 1fr 0.4fr 2fr 1fr";
     button_area.style.gridRow = "2 / 3";
@@ -204,9 +205,6 @@ function buttonListeners() {
         activityComplete(refresh_btn);
     });
 
-    // Setup the sound button
-    let sound_btn = document.getElementById("sound-button");
-    sound_btn.addEventListener("click", speakText);
 
     // Setup sound effect files
     let snd_spin = new sound("audio/spin1.m4a");

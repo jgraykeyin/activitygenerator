@@ -8,22 +8,21 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@300;400;500;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript" src="admin.js"></script>
 </head>
 <body>
     <div id="login-container">
         <header>
             <div id="logo"><img src="images/Logo.png"></div>
-            <div id="sitename">I'm Bored!</div>
-            <div id="tagline">The fully functional funtivity generator.</div>
+            <div id="sitename"><span style="font-size: 32px">I'm Bored Parent Portal</span></div>
+            <div id="tagline">
+                Please login with your email and password.<br />
+                Test account: admin@testing.com Password: 12345
+            </div>
         </header>
         
-        <div id="parentcopy">
-            <h1>Parent Portal</h1>
-            <p>Please login with your email and password.<br />
-            Test account: admin@testing.com Password: 12345</p>
-        </div>
 
-        <div id="input-area">
+        <div id="login-area">
             <input type="text" id="user-email" placeholder="E-mail address"><br />
             <input type="password" id="user-password" placeholder="Password"><br />
             <div><button type="button" id="login-button">Login</button></div>
