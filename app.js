@@ -144,7 +144,7 @@ function acceptActivity(reject, accept) {
 }
 
 
-function submitParentCode(refresh) {
+function activityComplete(refresh) {
 
     let output_text = document.getElementById("output-text");
     let output_area = document.getElementById("output-area");
@@ -182,6 +182,11 @@ function buttonListeners() {
     let refresh_btn = document.getElementById("activity-button");
     let accept_btn = document.getElementById("accept-button");
     let codesubmit_btn = document.getElementById("parent-submit");
+    let output_display = document.getElementById("output-area");
+
+    output_display.addEventListener("click", function() {
+        speakText();
+    });
 
     reject_btn.addEventListener("click", function() {
         console.log("Clicking reject");
@@ -196,7 +201,7 @@ function buttonListeners() {
     codesubmit_btn.addEventListener("click", function() {
         console.log("Clicking code submit");
         // let code = document.getElementById("parent-code").value;
-        submitParentCode(refresh_btn);
+        activityComplete(refresh_btn);
     });
 
     // Setup the sound button
