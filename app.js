@@ -5,6 +5,7 @@ async function fetchJSONData() {
     let response = await fetch(url);
     let activities = await response.json();
 
+    // Check to see if the JSON default data needs to be loaded from file, or load in updated data from session/localstorage
     if (sessionStorage.getItem("activitiesJSON") === null && localStorage.getItem("activitiesJSON") === null) {
         localStorage.setItem("activitiesJSON", JSON.stringify(activities));
     } else if (sessionStorage.getItem("activitiesJSON") === null && localStorage.getItem("activitiesJSON") !== null) {
@@ -12,7 +13,6 @@ async function fetchJSONData() {
     } else {
         act = sessionStorage.getItem("activitiesJSON");
         localStorage.setItem("activitiesJSON", act);
-        console.log(act);
     }
 }
 
@@ -70,6 +70,9 @@ function initStarCounter() {
     if (star_count === null || isNaN(star_count)) {
         init_count = 0;
         localStorage.setItem("star_count", init_count);
+    } else if (star_count < 0) {
+        star_count = 0;
+        localStorage.setItem("star_count", 0);
     } else {
         let x=0;
         while (x < star_count) {
@@ -161,8 +164,11 @@ function activityComplete(refresh) {
     let button_area = document.getElementById("button-area");
     let main_area = document.getElementById("main-container");
     let star_area = document.getElementById("star-area");
+    let snd_cheer = new sound("audio/cheering.m4a");
+
 
     output_text.innerHTML = "Congratulations! <br />You've earned a star!";
+    snd_cheer.play();
     addStarCount();
     addStarImage();
 
