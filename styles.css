@@ -102,6 +102,19 @@ header img {
     outline: none;
 }
 
+.admin-button {
+    background-color: #FFFBA4;
+    border: 2px solid #FFCC48;
+    border-radius: 10px;
+    box-shadow: 2px 2px black;
+    outline: none;
+    padding: 10px;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-family: 'Mali', cursive;
+    font-weight: bold;
+}
+
 #login-button {
     background-color: #FFFBA4;
     border: 7px solid #FFCC48;

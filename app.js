@@ -5,7 +5,13 @@ async function fetchJSONData() {
     let response = await fetch(url);
     let activities = await response.json();
 
-    localStorage.setItem("activitiesJSON", JSON.stringify(activities));
+    if (sessionStorage.getItem("activitiesJSON") === null) {
+        localStorage.setItem("activitiesJSON", JSON.stringify(activities));
+    } else {
+        act = sessionStorage.getItem("activitiesJSON");
+        localStorage.setItem("activitiesJSON", act);
+        console.log(act);
+    }
 }
 
 

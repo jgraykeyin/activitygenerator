@@ -5,8 +5,12 @@ async function fetchJSONData() {
     let response = await fetch(url);
     let activities = await response.json();
 
-    localStorage.setItem("activitiesJSON", JSON.stringify(activities));
-}
+    if (sessionStorage.getItem("activitiesJSON") === null) {
+        localStorage.setItem("activitiesJSON", JSON.stringify(activities));
+    } else {
+        act = sessionStorage.getItem("activitiesJSON");
+        localStorage.setItem("activitiesJSON",act);
+    }}
 
 
 function main() {
@@ -36,7 +40,6 @@ function main() {
         link = e.target.id;
         prefix = link.substring(0, 4);
         suffix = link.substring(4);
-        console.log(suffix);
 
         if (prefix === "act-") {
             showSubActivities(suffix);
@@ -69,7 +72,40 @@ function loginUser(email, password) {
 
 
 function showSubActivities(act) {
-    console.log(`Showing subs for ${act}`);
+    let id = parseInt(act);
+
+    let actJSON = localStorage.getItem("activitiesJSON");
+    let activities = JSON.parse(actJSON);
+    let email = localStorage.getItem("loggedin_email");
+    let content_area = document.getElementById("content-pane2");
+
+    let html = `<p>Logged in as <br />${email}</p><h3>Secondary Activities</h3>`;
+    html += `<p><input type='text' id='new-subaction'> <button type='button' class='admin-button' id='submit-subaction'>Add</button></p>`;
+    // html += `<p><button type='button' class='admin-button' id='save-all-button'>Save Changes</button>`;
+
+    html += "<ul>";
+    // This for loop is going in reverse to show the newest entries first
+    for (let i = activities[id]["actions"].length-1; i >= 0; --i) {
+        html += `<li style='font-size:18px;padding:7px;list-style-type:none;text-decoration:none' id='sub-${i}'>${activities[id]["actions"][i]["action"]}</li>`;
+    }
+    html += "</ul>"
+
+    content_area.innerHTML = html;
+
+    // Setup listener for the new Add button we just created
+    let add_button = document.getElementById("submit-subaction");
+    add_button.addEventListener("click", function() {
+        console.log("Clicked the new add button");
+
+        new_action = document.getElementById("new-subaction").value;
+        console.log(new_action);
+        // activities.act.actions["action"] = new_action;
+        activities[act]["actions"].push({"action":new_action});
+        localStorage.setItem("activitiesJSON", JSON.stringify(activities));
+        sessionStorage.setItem("activitiesJSON", JSON.stringify(activities));
+
+        showSubActivities(act);
+    });
 }
 
 
@@ -92,12 +128,13 @@ function showMainActivities(email) {
 
     html += `<ul>`;
     for (let i = 0; i < activities.length; ++i) {
-        html += `<li style='font-size:20px;padding:7px;list-style-type:none;text-decoration:underline' id='act-${activities[i]["activity"]}'>${activities[i]["activity"]}</li>`;
+        html += `<li style='font-size:20px;padding:7px;list-style-type:none;text-decoration:underline' id='act-${i}'>${activities[i]["activity"]}</li>`;
     }
     html += `</div><div id='content-pane2'><p>Logged in as <br />${email}</p><h3>Secondary Activities</h3>`;
 
     html += `</div>`;
     content_area.innerHTML = html;
 }
+
 
 window.addEventListener("load", main);
