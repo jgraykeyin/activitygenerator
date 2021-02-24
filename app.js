@@ -5,8 +5,10 @@ async function fetchJSONData() {
     let response = await fetch(url);
     let activities = await response.json();
 
-    if (sessionStorage.getItem("activitiesJSON") === null) {
+    if (sessionStorage.getItem("activitiesJSON") === null && localStorage.getItem("activitiesJSON") === null) {
         localStorage.setItem("activitiesJSON", JSON.stringify(activities));
+    } else if (sessionStorage.getItem("activitiesJSON") === null && localStorage.getItem("activitiesJSON") !== null) {
+        console.log("Data already loaded");
     } else {
         act = sessionStorage.getItem("activitiesJSON");
         localStorage.setItem("activitiesJSON", act);
