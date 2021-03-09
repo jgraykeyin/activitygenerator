@@ -12,7 +12,6 @@ async function fetchJSONData() {
     } else {
         act = sessionStorage.getItem("activitiesJSON");
         localStorage.setItem("activitiesJSON", act);
-        console.log(act);
     }
 }
 
@@ -85,7 +84,6 @@ function showSubActivities(act) {
 
     let html = `<p>Logged in as <br />${email}</p><h3>Secondary Activities</h3>`;
     html += `<p><input type='text' id='new-subaction'> <button type='button' class='admin-button' id='submit-subaction'>Add</button></p>`;
-    // html += `<p><button type='button' class='admin-button' id='save-all-button'>Save Changes</button>`;
 
     html += "<ul>";
     // This for loop is going in reverse to show the newest entries first
@@ -103,7 +101,6 @@ function showSubActivities(act) {
 
         new_action = document.getElementById("new-subaction").value;
         console.log(new_action);
-        // activities.act.actions["action"] = new_action;
         activities[act]["actions"].push({"action":new_action});
         localStorage.setItem("activitiesJSON", JSON.stringify(activities));
         sessionStorage.setItem("activitiesJSON", JSON.stringify(activities));
